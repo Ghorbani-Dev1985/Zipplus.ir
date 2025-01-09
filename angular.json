@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/coffee-home",
+            "outputPath": "dist/zipplus",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -23,11 +23,11 @@
             "assets": [
               {
                 "glob": "**/*",
-                "input": "public"
+                "input": "src/app/assets"
               }
             ],
             "styles": [
-              "src/styles.css"
+              "src/app/assets/styles/styles.css"
             ],
             "scripts": [],
             "server": "src/main.server.ts",
@@ -86,16 +86,19 @@
             "assets": [
               {
                 "glob": "**/*",
-                "input": "public"
+                "input": "src/app/assets"
               }
             ],
             "styles": [
-              "src/styles.css"
+              "src/app/assets/styles/styles.css"
             ],
             "scripts": []
           }
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "52d71b20-43d2-4aa2-8ecd-b42e81c32462"
   }
 }

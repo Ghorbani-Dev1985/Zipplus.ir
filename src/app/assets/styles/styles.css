@@ -1,0 +1,41 @@
+/* You can add global styles to this file, and also import other style files */
+@import url("./font.css");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  *{
+    @apply p-0 m-0 box-border font-ShabnamFD;
+  }
+  html {
+    @apply scroll-smooth font-ShabnamFD;
+  }
+  body {
+    @apply bg-white font-ShabnamFD text-base text-textColor min-h-screen;
+  }
+  a{
+    @apply hover:text-primary transition-colors
+  }
+}
+@layer components {
+  .mat-typography h1 {
+    @apply font-ShabnamFD;
+  }
+}
+
+@layer utilities {
+  .flex-center {
+    @apply flex justify-center items-center;
+  }
+  .flex-between {
+    @apply flex justify-between items-center;
+  }
+  .smooth-transition {
+    @apply transition-all duration-700;
+  }
+  .dir-ltr {
+    text-align: left;
+    direction: ltr;
+  }
+}
