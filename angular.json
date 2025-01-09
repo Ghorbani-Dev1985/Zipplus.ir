@@ -23,11 +23,11 @@
             "assets": [
               {
                 "glob": "**/*",
-                "input": "src/app/assets"
+                "input": "src/app/_assets"
               }
             ],
             "styles": [
-              "src/app/assets/styles/styles.css"
+              "src/app/_assets/styles/styles.css"
             ],
             "scripts": [],
             "server": "src/main.server.ts",
@@ -86,11 +86,11 @@
             "assets": [
               {
                 "glob": "**/*",
-                "input": "src/app/assets"
+                "input": "src/app/_assets"
               }
             ],
             "styles": [
-              "src/app/assets/styles/styles.css"
+              "src/app/_assets/styles/styles.css"
             ],
             "scripts": []
           }
