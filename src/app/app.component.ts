@@ -11,5 +11,5 @@ import { RouterModule } from '@angular/router';
   imports: [HeaderComponent, FooterComponent, RouterModule]
 })
 export class AppComponent {
-  title = 'CoffeeHome';
+  title = 'Zipplus.ir';
 }

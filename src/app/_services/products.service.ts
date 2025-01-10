@@ -1,15 +1,14 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { environment } from '../../environment';
 import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductsService {
-  private baseUrl = environment.apiBaseUrl;
-  private consumerKey = environment.consumerKey;
-  private consumerSecret = environment.consumerSecret;
+  private baseUrl = import.meta.env.NG_APP_BASE_URL;
+  private consumerKey = import.meta.env.NG_APP_CONSUMER_KEY;
+  private consumerSecret = import.meta.env.NG_APP_CONSUMER_SECRET;
   constructor(private http: HttpClient) { }
   getProducts(): Observable<any> {
     const params = new HttpParams()
