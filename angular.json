@@ -11,7 +11,7 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@ngx-env/builder:application",
+          "builder": "@ngx-env/builder:browser",
           "options": {
             "outputPath": "dist/zipplus",
             "index": "src/index.html",
@@ -30,6 +30,9 @@
               "src/app/_assets/styles/styles.css"
             ],
             "scripts": [],
+            "ngxEnv": {
+              "prefix": "(ORG|GITHUB|)_"
+            },
             "server": "src/main.server.ts",
             "outputMode": "server",
             "ssr": {
