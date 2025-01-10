@@ -26,6 +26,9 @@ module.exports = {
         ShabnamFD: ["Shabnam-FD", "Tahoma"],
         Shabnam: ["Shabnam", "Tahoma"],
       },
+      backgroundImage: {
+        'footerBg' : 'url("/images/footer/footer-bg.png")',
+      }
     },
   },
   plugins: [
