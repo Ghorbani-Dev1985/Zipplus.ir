@@ -1,21 +1,33 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Injectable, OnDestroy } from '@angular/core';
+import { Environments } from 'app/_shared/environments/environments';
+import { finalize, Observable, Subscription } from 'rxjs';
+import { LoadingService } from './loading.service';
+
 
 @Injectable({
   providedIn: 'root'
 })
-export class ProductsService {
-  private baseUrl = import.meta.env.NG_APP_BASE_URL;
-  private consumerKey = import.meta.env.NG_APP_CONSUMER_KEY;
-  private consumerSecret = import.meta.env.NG_APP_CONSUMER_SECRET;
-  constructor(private http: HttpClient) { }
-  getProducts(): Observable<any> {
-    console.log(this.baseUrl)
-    const params = new HttpParams()
-      .set('consumer_key', this.consumerKey)
-      .set('consumer_secret', this.consumerSecret);
+export class ProductsService implements OnDestroy {
+  private subscription: Subscription = new Subscription();
 
-    return this.http.get(`${this.baseUrl}/products?per_page=20`, { params });
+  constructor(private http: HttpClient, private loadingService: LoadingService) { }
+  getProducts(productPage:number = 1): Observable<any> {
+    const params = new HttpParams()
+      .set('consumer_key', Environments.consumerKey)
+      .set('consumer_secret', Environments.consumerSecret)
+      .set('per_page', '20')
+      .set('page', productPage.toString());
+      this.loadingService.showLoading();
+    const request = this.http.get(`${Environments.baseUrl}/products`, { params }).pipe(
+      finalize(() => {
+        this.loadingService.hideLoading();
+      })
+    );
+    return request;
+  }
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 }
+

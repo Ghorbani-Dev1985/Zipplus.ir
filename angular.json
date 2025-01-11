@@ -11,14 +11,12 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@ngx-env/builder:browser",
+          "builder": "@ngx-env/builder:application",
           "options": {
-            "outputPath": "dist/zipplus",
+            "outputPath": "dist/Zipplus.ir",
             "index": "src/index.html",
             "browser": "src/main.ts",
-            "polyfills": [
-              "zone.js"
-            ],
+            "polyfills": ["zone.js"],
             "tsConfig": "tsconfig.app.json",
             "assets": [
               {
@@ -28,37 +26,22 @@
             ],
             "styles": [
               "src/app/_assets/styles/styles.css"
-            ],
-            "scripts": [],
-            "ngxEnv": {
-              "prefix": "(ORG|GITHUB|)_"
-            },
-            "server": "src/main.server.ts",
-            "outputMode": "server",
-            "ssr": {
-              "entry": "src/server.ts"
-            }
+            ]
           },
           "configurations": {
-            "production": {
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "500kB",
-                  "maximumError": "1MB"
-                },
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "4kB",
-                  "maximumError": "8kB"
-                }
-              ],
-              "outputHashing": "all"
-            },
             "development": {
-              "optimization": false,
               "extractLicenses": false,
+              "namedChunks": true,
+              "optimization": false,
               "sourceMap": true
+            },
+            "production": {
+              "aot": true,
+              "extractLicenses": true,
+              "namedChunks": false,
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false
             }
           },
           "defaultConfiguration": "production"
@@ -73,32 +56,26 @@
               "buildTarget": "Zipplus.ir:build:development"
             }
           },
-          "defaultConfiguration": "development",
-          "options": {}
+          "defaultConfiguration": "development"
         },
         "extract-i18n": {
-          "builder": "@ngx-env/builder:extract-i18n",
-          "options": {}
+          "builder": "@ngx-env/builder:extract-i18n"
         },
         "test": {
-          "builder": "@ngx-env/builder:karma",
+          "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "polyfills": [
-              "zone.js",
-              "zone.js/testing"
-            ],
+            "polyfills": ["zone.js", "zone.js/testing"],
             "tsConfig": "tsconfig.spec.json",
             "assets": [
               {
                 "glob": "**/*",
-                "input": "src/app/_assets"
+                "input": "public"
               }
             ],
             "styles": [
               "src/app/_assets/styles/styles.css"
             ],
-            "scripts": [],
-            "builderMode": "browser"
+            "scripts": []
           }
         }
       }
