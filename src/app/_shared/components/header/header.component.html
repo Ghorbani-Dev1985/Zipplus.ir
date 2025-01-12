@@ -9,7 +9,7 @@
        <nav>
          <ul class="flex-center gap-x-3">
            <li><a href="">صفحه نخست</a></li>
-           <li><a href=""> محصولات زیپ پلاس</a></li>
+           <li><a href="/products"> محصولات زیپ پلاس</a></li>
            <li><a href=""> تماس با ما</a></li>
          </ul>
        </nav>
@@ -79,12 +79,10 @@
 <!-- Mobile Menu -->
   <div
   class='fixed inset-0 bg-secondary-50/40 z-50 backdrop-blur-sm will-change-["opacity,backdrop"]' [ngClass]="
-    showMobileMenu ? 'pointer-events-auto opacity-100' : 'pointer-events-none opacity-0'" (click)="showMobileMenu = false"
->
+    showMobileMenu ? 'pointer-events-auto opacity-100' : 'pointer-events-none opacity-0'" (click)="showMobileMenu = false">
   <aside
     class='absolute bg-white top-0 right-0 h-full py-md px-1 shadow-md w-3/4 md:w-1/2 will-change-transform transition-transform duration-700 ease-in-out overflow-y-auto scroll-smooth scrollbar-thin scrollbar-thumb-primary scrollbar-track-primary-100' [ngClass]="
-    showMobileMenu ? 'right-0 translate-x-0' : 'right-0 translate-x-full'"
-  >
+    showMobileMenu ? 'right-0 translate-x-0' : 'right-0 translate-x-full'">
     <div class="w-full flex-between mb-md px-1.5 py-6 border-b">
       <h1 class="font-extrabold">بوتیک زیپ پلاس</h1>
       <button (click)="showMobileMenu = false">
@@ -95,13 +93,8 @@
     </div>
     <nav class="py-5">
       <ul class="font-extrabold child:py-3 child:border-b">
-        <li><a href="">صفحه نخست</a></li>
-        <li><a href=""> پالتو</a></li>
-        <li><a href=""> شال و روسری</a></li>
-        <li><a href=""> کت جین</a></li>
-        <li><a href=""> شلوار</a></li>
-        <li><a href=""> دامن جین</a></li>
-        <li><a href=""> بادی بلوز بافت کراپ</a></li>
+        <li><a [routerLink]="['/']">صفحه نخست</a></li>
+        <li *ngFor="let categoryNav of categoriesNav"><a [routerLink]="['/category/', categoryNav.id]"> {{categoryNav.name}}</a></li>
         <li><a href=""> تماس با ما</a></li>
         <li><a href="">  حساب کاربری</a></li>
       </ul>

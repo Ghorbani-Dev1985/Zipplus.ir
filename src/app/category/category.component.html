@@ -1,12 +1,19 @@
+<div
+  class="w-full flex flex-col items-center gap-y-4 my-8 border-b-2 border-b-gray-200">
+  <h2
+    class="flex items-center gap-x-1.5 text-xl font-extrabold text-primary -mb-[2px] pb-3 border-b-2 border-b-primary">
+    {{this.categoryName}} <p *ngIf="countOfProducts" class="flex-center size-7 bg-secondary rounded-full">{{this.countOfProducts}}</p>
+  </h2>
+</div>
 <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
   <ng-container *ngIf="isLoading; else productList">
     <div *ngFor="let _ of [].constructor(12); let i = index">
       <app-loading></app-loading>
     </div>
   </ng-container>
-  <ng-template #productList>
-    <app-product-card *ngFor="let productByCategory of productsByCategory" [product]="productByCategory" [isLoading]="isLoading"></app-product-card>
-  </ng-template>
+    <ng-template #productList>
+      <app-product-card *ngFor="let productByCategory of productsByCategory" [product]="productByCategory" [isLoading]="isLoading"></app-product-card>
+    </ng-template>
   <div *ngIf="currentPage > 1" class="col-span-4 flex-center">
     <nav aria-label="Page navigation example">
       <ul class="flex items-center -space-x-px h-8 text-sm">

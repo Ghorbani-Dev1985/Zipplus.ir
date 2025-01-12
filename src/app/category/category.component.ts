@@ -17,6 +17,8 @@ export class CategoryComponent implements OnInit{
   isLoading: boolean = false;
   categoryId!: string;
   currentPage: number = 1;
+  categoryName: string = "";
+  countOfProducts: string = "";
   constructor(private productsService: ProductsService, private route: ActivatedRoute){
 
   }
@@ -26,8 +28,10 @@ export class CategoryComponent implements OnInit{
       this.isLoading = true;
       try {
        this.productsByCategory = await firstValueFrom(this.productsService.getProductsByCategory(this.categoryId))
+       this.categoryName = this.productsByCategory[0].categories[0].name;
+       this.countOfProducts = this.productsByCategory.length.toString();
        this.isLoading = false;
-       console.log(this.productsByCategory)
+       console.log(this.categoryName)
       } catch (error) {
         this.isLoading = false;
       }
