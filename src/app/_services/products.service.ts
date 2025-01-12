@@ -26,6 +26,33 @@ export class ProductsService implements OnDestroy {
     );
     return request;
   }
+  getCategories(): Observable<any> {
+    const params = new HttpParams()
+      .set('consumer_key', Environments.consumerKey)
+      .set('consumer_secret', Environments.consumerSecret)
+      .set('per_page', '60');
+      this.loadingService.showLoading();
+    const request = this.http.get(`${Environments.baseUrl}/products/categories`, { params }).pipe(
+      finalize(() => {
+        this.loadingService.hideLoading();
+      })
+    );
+    return request;
+  }
+  getProductsByCategory(categoryId:string = ""): Observable<any> {
+    const params = new HttpParams()
+      .set('consumer_key', Environments.consumerKey)
+      .set('consumer_secret', Environments.consumerSecret)
+      .set('per_page', '20')
+      .set('category', categoryId);
+      this.loadingService.showLoading();
+    const request = this.http.get(`${Environments.baseUrl}/products`, { params }).pipe(
+      finalize(() => {
+        this.loadingService.hideLoading();
+      })
+    );
+    return request;
+  }
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
