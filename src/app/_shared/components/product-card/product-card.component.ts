@@ -5,6 +5,7 @@ import { PriceLocaleStringPipe } from 'app/_shared/pipes/price-locale-string.pip
 import { LoadingComponent } from '../loading/loading.component';
 import { TomanComponent } from '../toman/toman.component';
 import { getDiscountPercentage } from 'app/_shared/utils/getDiscountPercentage';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-product-card',
@@ -15,5 +16,11 @@ import { getDiscountPercentage } from 'app/_shared/utils/getDiscountPercentage';
 export class ProductCardComponent {
   @Input() product: any;
   @Input() isLoading: boolean = false;
+  constructor(private router: Router){
+
+  }
   getDiscountPercentage = getDiscountPercentage;
+  navigateToProduct(productId: number){
+    this.router.navigate(['/product', productId.toString()]);
+  }
 }

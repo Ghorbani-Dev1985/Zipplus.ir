@@ -1,0 +1,10 @@
+.splide {
+  width: 100%;
+  height: 400px;
+}
+.splide__slide img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 8px;
+}

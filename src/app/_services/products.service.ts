@@ -26,6 +26,18 @@ export class ProductsService implements OnDestroy {
     );
     return request;
   }
+  getProduct(productId:string): Observable<any> {
+    const params = new HttpParams()
+      .set('consumer_key', Environments.consumerKey)
+      .set('consumer_secret', Environments.consumerSecret)
+      this.loadingService.showLoading();
+    const request = this.http.get(`${Environments.baseUrl}/products/${productId}`, { params }).pipe(
+      finalize(() => {
+        this.loadingService.hideLoading();
+      })
+    );
+    return request;
+  }
   getCategories(): Observable<any> {
     const params = new HttpParams()
       .set('consumer_key', Environments.consumerKey)

@@ -1,0 +1,16 @@
+<div class="flex-between gap-5">
+  <!-- Right Side -->
+ <div class="flex flex-1">
+   <div class="splide">
+    <div class="splide__track">
+      <ul class="splide__list">
+        <li class="splide__slide" *ngFor="let productImage of productImages">
+          <img [src]="productImage.src" [alt]="productImage.alt" class="w-full rounded-lg">
+        </li>
+      </ul>
+    </div>
+  </div>
+ </div>
+  <!-- Right Left -->
+ <div class="flex flex-1"></div>
+</div>

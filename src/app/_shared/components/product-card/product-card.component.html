@@ -2,7 +2,7 @@
   <app-loading></app-loading>
 </div>
 <ng-template #productContent>
-  <a [href]="product.slug" class="flex flex-col overflow-hidden group rounded-xl border">
+  <div (click)="navigateToProduct(product.id)" class="flex flex-col cursor-pointer overflow-hidden group rounded-xl border">
     <div class="relative aspect-square overflow-hidden">
       <button class="absolute top-2 left-2 z-10 bg-white border border-gray-200 rounded-full p-1.5">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
@@ -23,5 +23,5 @@
         </p>
       </div>
     </div>
-  </a>
+  </div>
 </ng-template>

@@ -31,7 +31,6 @@ export class CategoryComponent implements OnInit{
        this.categoryName = this.productsByCategory[0].categories[0].name;
        this.countOfProducts = this.productsByCategory.length.toString();
        this.isLoading = false;
-       console.log(this.categoryName)
       } catch (error) {
         this.isLoading = false;
       }
