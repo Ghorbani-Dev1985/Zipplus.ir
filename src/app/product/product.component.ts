@@ -1,28 +1,34 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProductsService } from 'app/_services/products.service';
 import { firstValueFrom } from 'rxjs';
 import { CommonModule } from '@angular/common';
-import Splide from '@splidejs/splide';
+import { ExtractOriginalPricePipe } from 'app/_shared/pipes/extract-original-price.pipe';
+import { PriceLocaleStringPipe } from 'app/_shared/pipes/price-locale-string.pipe';
+import { TomanComponent } from "../_shared/components/toman/toman.component";
+import { SafeHtmlPipe } from 'app/_shared/pipes/safe-html.pipe';
+import { RelatedProductsComponent } from "./related-products/related-products.component";
+
 
 @Component({
   selector: 'app-product',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, ExtractOriginalPricePipe, PriceLocaleStringPipe, TomanComponent, SafeHtmlPipe, RelatedProductsComponent],
   templateUrl: './product.component.html',
-  styleUrls: ['./product.component.css']
-
+  styleUrls: ['./product.component.css'],
+  encapsulation: ViewEncapsulation.None,
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class ProductComponent implements OnInit{
  product: any;
  productImages:any;
  isLoading: boolean = false;
  productId!: string;
- splide!: Splide;
+ productQty: number = 1;
+ relatedProductsIds : number[] = []
  constructor(private productsService: ProductsService , private route: ActivatedRoute){
 
  }
-
  ngOnInit(): void {
   this.route.params.subscribe(async (params) => {
     this.productId = params['id']
@@ -31,10 +37,19 @@ export class ProductComponent implements OnInit{
      this.product = await firstValueFrom(this.productsService.getProduct(this.productId))
      this.isLoading = false;
      this.productImages = this.product.images
+     this.relatedProductsIds = this.product.related_ids;
      console.log(this.product)
     } catch (error) {
       this.isLoading = false;
     }
   })
+ }
+ increaseQty(){
+  this.productQty++
+ }
+ decreaseQty(){
+  if(this.productQty > 1){
+    this.productQty -= this.productQty
+    }
  }
 }

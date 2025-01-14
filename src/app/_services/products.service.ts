@@ -65,6 +65,19 @@ export class ProductsService implements OnDestroy {
     );
     return request;
   }
+  getRelatedProducts(productIds:number[]): Observable<any> {
+    const params = new HttpParams()
+      .set('consumer_key', Environments.consumerKey)
+      .set('consumer_secret', Environments.consumerSecret)
+      .set('include' , productIds.join(','));
+      this.loadingService.showLoading();
+    const request = this.http.get(`${Environments.baseUrl}/products`, { params }).pipe(
+      finalize(() => {
+        this.loadingService.hideLoading();
+      })
+    );
+    return request;
+  }
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
