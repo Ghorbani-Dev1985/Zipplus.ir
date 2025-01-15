@@ -35,7 +35,6 @@ swiper-slide {
   height: 80%;
   width: 100%;
 }
-
 .mySwiper2 {
   height: 20%;
   box-sizing: border-box;
@@ -51,14 +50,9 @@ swiper-slide {
 .mySwiper2 .swiper-slide-active {
   opacity: 1;
 }
-
-.mySwiper .swiper-scrollbar {
-  background: rgba(255, 0, 0, 0.73) !important; /* Red background with transparency */
+.swiper-pagination-progressbar .swiper-pagination-progressbar-fill{
+  background-color: #ec4899 !important;
 }
-
-.swiper-scrollbar-drag {
-  background: #007bff !important; /* Primary color background */
-}
-swiper-container .swiper-button-next .swiper-button-prev{
-  @apply !bg-gray-200
+.mySwiper .swiper-button-prev .swiper-rtl .swiper-button-next{
+  color: #fff !important;
 }

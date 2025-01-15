@@ -8,12 +8,14 @@
 </div>
 <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
   <ng-container *ngIf="isLoading; else productList">
-    <div *ngFor="let _ of [].constructor(12); let i = index">
+    @for (_ of [].constructor(12); track $index) {
       <app-loading></app-loading>
-    </div>
+    }
   </ng-container>
   <ng-template #productList>
-    <app-product-card *ngFor="let product of products" [product]="product" [isLoading]="isLoading"></app-product-card>
+    @for (product of products; track $index) {
+      <app-product-card [product]="product" [isLoading]="isLoading"></app-product-card>
+    }
   </ng-template>
 </div>
 <div class="flex-center my-5">

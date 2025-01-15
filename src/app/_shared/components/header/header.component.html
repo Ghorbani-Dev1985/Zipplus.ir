@@ -94,7 +94,9 @@
     <nav class="py-5">
       <ul class="font-extrabold child:py-3 child:border-b">
         <li><a [routerLink]="['/']">صفحه نخست</a></li>
-        <li *ngFor="let categoryNav of categoriesNav"><a [routerLink]="['/category/', categoryNav.id]"> {{categoryNav.name}}</a></li>
+        @for (categoryNav of categoriesNav; track $index) {
+          <li><a [routerLink]="['/category/', categoryNav.id]"> {{categoryNav.name}}</a></li>
+        }
         <li><a href=""> تماس با ما</a></li>
         <li><a href="">  حساب کاربری</a></li>
       </ul>
