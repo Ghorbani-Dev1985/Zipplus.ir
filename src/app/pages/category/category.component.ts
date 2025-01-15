@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProductsService } from 'app/_services/products.service';
 import { LoadingComponent } from 'app/_shared/components/loading/loading.component';
@@ -10,16 +10,18 @@ import { firstValueFrom } from 'rxjs';
   selector: 'app-category',
   imports: [CommonModule, LoadingComponent, ProductCardComponent],
   templateUrl: './category.component.html',
-  styles: ``
+  providers: [ProductsService]
 })
 export class CategoryComponent implements OnInit{
+  route : ActivatedRoute = inject(ActivatedRoute)
+  productsService: ProductsService = inject(ProductsService)
   productsByCategory: any[] = [];
   isLoading: boolean = false;
   categoryId!: string;
   currentPage: number = 1;
   categoryName: string = "";
   countOfProducts: string = "";
-  constructor(private productsService: ProductsService, private route: ActivatedRoute){
+  constructor(){
 
   }
   ngOnInit(): void {
@@ -46,6 +48,9 @@ export class CategoryComponent implements OnInit{
       },
       error: (error) => {
         console.error('Error loading products', error);
+        this.isLoading = false;
+      },
+      complete: () => {
         this.isLoading = false;
       }
     });

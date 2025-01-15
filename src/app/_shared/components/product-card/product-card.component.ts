@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import { ExtractOriginalPricePipe } from 'app/_shared/pipes/extract-original-price.pipe';
 import { PriceLocaleStringPipe } from 'app/_shared/pipes/price-locale-string.pipe';
 import { LoadingComponent } from '../loading/loading.component';
@@ -14,13 +14,14 @@ import { Router } from '@angular/router';
   styles: ``
 })
 export class ProductCardComponent {
+  router: Router = inject(Router)
   @Input() product: any;
   @Input() isLoading: boolean = false;
-  constructor(private router: Router){
+  constructor(){
 
   }
   getDiscountPercentage = getDiscountPercentage;
-  navigateToProduct(productId: number){
-    this.router.navigate(['/product', productId.toString()]);
+  navigateToProduct(productId: number , productName: string){
+    this.router.navigate(['/product', productId.toString()], {queryParams: {name: productName}});
   }
 }

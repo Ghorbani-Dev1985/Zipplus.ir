@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { ProductsService } from '../_services/products.service';
-import { LoadingService } from './../_services/loading.service';
+import { Component, inject, OnInit } from '@angular/core';
+import { ProductsService } from '../../_services/products.service';
+import { LoadingService } from '../../_services/loading.service';
 import { CommonModule } from '@angular/common';
-import { LoadingComponent } from "../_shared/components/loading/loading.component";
-import { ProductCardComponent } from "../_shared/components/product-card/product-card.component";
+import { LoadingComponent } from "../../_shared/components/loading/loading.component";
+import { ProductCardComponent } from "../../_shared/components/product-card/product-card.component";
 import { ProductCategoriesComponent } from "./product-categories/product-categories.component";
 
 @Component({
@@ -11,13 +11,15 @@ import { ProductCategoriesComponent } from "./product-categories/product-categor
   imports: [CommonModule, LoadingComponent, ProductCardComponent, ProductCategoriesComponent],
   standalone: true,
   templateUrl: './home.component.html',
-  styles: ``
+  providers: [LoadingService , ProductsService]
 })
 export class HomeComponent implements OnInit {
+  loadingService : LoadingService = inject(LoadingService)
+  productsService: ProductsService = inject(ProductsService)
   products: any[] = [];
   isLoading: boolean = false;
   currentPage: number = 1;
-  constructor(private productsService: ProductsService , private loadingService: LoadingService) {
+  constructor() {
     this.loadingService.loading$.subscribe((isLoading) => {
       this.isLoading = isLoading;
     });

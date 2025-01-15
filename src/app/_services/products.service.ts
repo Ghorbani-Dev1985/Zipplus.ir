@@ -1,17 +1,16 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Injectable, OnDestroy } from '@angular/core';
+import { inject, Injectable, OnDestroy } from '@angular/core';
 import { Environments } from 'app/_shared/environments/environments';
 import { finalize, Observable, Subscription } from 'rxjs';
 import { LoadingService } from './loading.service';
 
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class ProductsService implements OnDestroy {
   private subscription: Subscription = new Subscription();
-
-  constructor(private http: HttpClient, private loadingService: LoadingService) { }
+  http : HttpClient = inject(HttpClient)
+  loadingService: LoadingService = inject(LoadingService)
+  constructor() { }
   getProducts(productPage:number = 1): Observable<any> {
     const params = new HttpParams()
       .set('consumer_key', Environments.consumerKey)

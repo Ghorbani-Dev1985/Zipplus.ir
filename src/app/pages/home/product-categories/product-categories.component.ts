@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { ProductsService } from 'app/_services/products.service';
 
@@ -7,9 +7,11 @@ import { ProductsService } from 'app/_services/products.service';
   selector: 'app-product-categories',
   imports: [CommonModule],
   templateUrl: './product-categories.component.html',
-  styles: ``
+  providers: [ProductsService]
 })
 export class ProductCategoriesComponent{
+  router: Router = inject(Router)
+  productsService: ProductsService = inject(ProductsService)
   categories: any[] = [];
   categoriesLinkItems: Array<{id: string, src: string, alt: string }> = [
     {
@@ -43,7 +45,7 @@ export class ProductCategoriesComponent{
       alt: 'بادی بلوز بافت کراپ زیپ پلاس'
     }
   ];
-  constructor(private productsService: ProductsService , private router: Router){
+  constructor(){
 
   }
   getCategories(): void {
@@ -51,7 +53,7 @@ export class ProductCategoriesComponent{
       this.categories = data;
     })
   }
-  navigateToCategory(categoryId: string): void {
-    this.router.navigate(['/category', categoryId]);
+  navigateToCategory(categoryId: string , categoryName: string): void {
+    this.router.navigate(['/category', categoryId], {queryParams: {name: categoryName}});
   }
 }

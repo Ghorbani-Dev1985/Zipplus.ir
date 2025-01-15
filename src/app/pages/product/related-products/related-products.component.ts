@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, inject, Input, OnInit } from '@angular/core';
 import { ProductsService } from 'app/_services/products.service';
 import { log } from 'console';
 
@@ -6,13 +6,15 @@ import { log } from 'console';
   selector: 'app-related-products',
   imports: [],
   templateUrl: './related-products.component.html',
-  styleUrl: './related-products.component.css'
+  styleUrl: './related-products.component.css',
+  providers: [ProductsService]
 })
 export class RelatedProductsComponent implements OnInit{
+  productsService: ProductsService = inject(ProductsService)
   @Input() relatedProductsIds: number[] = [];
   isLoading: boolean = false;
   relatedProducts: any;
-    constructor(private productsService: ProductsService){
+    constructor(){
 
     }
     ngOnInit(): void {

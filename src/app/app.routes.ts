@@ -1,24 +1,10 @@
 import { Routes } from '@angular/router';
-import { HomeComponent } from './home/home.component';
-import { CategoryComponent } from './category/category.component';
-import { ProductsComponent } from './products/products.component';
-import { ProductComponent } from './product/product.component';
+import { MasterLayoutComponent } from './layout/master-layout/master-layout.component';
 
 export const routes: Routes = [
    {
     path: '',
-    component: HomeComponent
+    component: MasterLayoutComponent,
+    loadChildren:() => import('./pages/pages.routes').then((c) => c.routes),
   },
-  {
-    path: 'category/:id' ,
-    component: CategoryComponent
-  },
-  {
-    path: 'products',
-    component: ProductsComponent
-  },
-  {
-    path: 'product/:id',
-    component: ProductComponent
-  }
 ];
