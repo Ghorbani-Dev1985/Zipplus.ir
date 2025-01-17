@@ -9,7 +9,6 @@
     space-between="10"
     navigation="true"
     autoplay-delay="4000"
-    autoplay-disable-on-interaction="false"
     effect="flip"
     pagination-type="progressbar"
     thumbs-swiper=".mySwiper2"
@@ -30,17 +29,17 @@
     </swiper-container>
  </div>
   <!-- Left Side -->
- <div class="w-full md:w-1/2 bg-gray-50 space-y-5 rounded-lg border-2 p-2">
-   <h1 class="text-base md:text-2xl font-extrabold">{{product.name}}</h1>
-   <div class="flex-center gap-x-1.5">
+ <div class="w-full sticky top-1 md:w-1/2 bg-gray-50 space-y-5 rounded-lg border-2 p-2">
+   <h1 class="text-base md:text-4xl font-extrabold my-4">{{product.name}}</h1>
+   <div class="flex items-center gap-x-1.5">
     @if (product.on_sale) {
       <p class="text-zinc-500 line-through">{{ product.price_html | extractOriginalPrice }}</p>
     }
-    <p class="flex items-center gap-x-1 text-primary font-extrabold text-xs md:text-2xl">
+    <p class="flex items-center gap-x-1 text-primary font-extrabold text-base md:text-3xl">
       {{ product.price | priceLocaleString }} <app-toman></app-toman>
     </p>
   </div>
-  <p [innerHTML]="product.short_description | safeHtml" class="font-bold child:space-y-5"></p>
+  <p [innerHTML]="product.short_description | safeHtml" class="font-bold child:leading-10"></p>
   @if(product.stock_quantity === 1){
     <div class="flex-center gap-x-1 animate-pulse text-sky-500 bg-sky-100 rounded-lg p-1 font-extrabold text-base text-center my-5">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
@@ -54,7 +53,7 @@
       <div class="flex-center gap-x-1.5">
          <p class="badge">{{productAttr.name}}</p>
          <select [id]="productAttr.id"  class="bg-white border border-secondary text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2">
-           <option selected>لطفا یکی از موارد را انتخاب نمایید</option>
+           <option selected disabled>لطفا یکی از موارد را انتخاب نمایید</option>
            @for (productAttrOption of productAttr.options; track $index) {
              <ng-container>
                <option [value]="productAttrOption">{{productAttrOption}}</option>
@@ -88,22 +87,26 @@
       <button class="main-btn">افزودن به سبد</button>
     </div>
     <p class="w-full h-px bg-pink-200"></p>
-     <div class="flex items-center">
-      <span class="badge">شناسه محصول</span>
-      <span>{{product.sku}}</span>
-     </div>
+    @if(product.sku !== "" ){
+      <div class="flex items-center">
+       <span class="badge">شناسه محصول</span>
+       <span>{{product.sku}}</span>
+      </div>
+    }
      <div class="flex items-center">
       <span class="badge"> دسته بندی</span>
       @for (category of product.categories; track $index) {
         <span>{{category.name}} @if ($index < product.categories.length - 1) {,}</span>
       }
      </div>
-     <div>
-      <span class="badge">  برچسب</span>
-      @for (tag of product.tags; track $index) {
-        <span class="leading-9">{{tag.name}} @if ($index < product.tags.length - 1) {,}</span>
+     @if (product.tags.length > 0) {
+        <div>
+        <span class="badge">  برچسب</span>
+        @for (tag of product.tags; track $index) {
+          <span class="leading-9">{{tag.name}} @if ($index < product.tags.length - 1) {,}</span>
+        }
+      </div>
       }
-     </div>
  </div>
 </div>
 <div class="w-full h-px bg-gray-200 my-8"></div>

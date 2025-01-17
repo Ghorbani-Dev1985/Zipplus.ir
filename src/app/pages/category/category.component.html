@@ -6,16 +6,17 @@
   </h2>
 </div>
 <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-  <ng-container *ngIf="isLoading; else productList">
-    @for (_ of [].constructor(12); track $index) {
-      <app-loading></app-loading>
-    }
-  </ng-container>
-    <ng-template #productList>
-      @for (productByCategory of productsByCategory; track $index) {
-        <app-product-card [isLoading]="isLoading"></app-product-card>
+  @if (isLoading) {
+    <ng-container>
+      @for (_ of [].constructor(12); track $index) {
+        <app-loading></app-loading>
       }
-    </ng-template>
+    </ng-container>
+  }@else {
+      @for (productByCategory of productsByCategory; track $index) {
+        <app-product-card [product]="productByCategory" [isLoading]="isLoading"></app-product-card>
+      }
+  }
     @if (currentPage > 1) {
  <div class="col-span-4 flex-center">
     <nav aria-label="Page navigation example">

@@ -1,4 +1,4 @@
-import { Component, CUSTOM_ELEMENTS_SCHEMA, inject, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { ProductsService } from 'app/_services/products.service';
 import { firstValueFrom } from 'rxjs';
@@ -16,7 +16,6 @@ import { ProductLoadingComponent } from "./product-loading/product-loading.compo
   imports: [CommonModule, ExtractOriginalPricePipe, PriceLocaleStringPipe, TomanComponent, SafeHtmlPipe, RelatedProductsComponent, ProductLoadingComponent],
   templateUrl: './product.component.html',
   styleUrls: ['./product.component.css'],
-  encapsulation: ViewEncapsulation.None,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [ProductsService]
 })

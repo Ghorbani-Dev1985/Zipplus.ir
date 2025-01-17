@@ -1,10 +1,14 @@
-import { Component, inject, Input, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, inject, Input, OnInit } from '@angular/core';
 import { ProductsService } from 'app/_services/products.service';
-import { log } from 'console';
+import { LoadingComponent } from "../../../_shared/components/loading/loading.component";
+import { ProductCardComponent } from "../../../_shared/components/product-card/product-card.component";
+
 
 @Component({
   selector: 'app-related-products',
-  imports: [],
+  imports: [CommonModule, LoadingComponent, ProductCardComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   templateUrl: './related-products.component.html',
   styleUrl: './related-products.component.css',
   providers: [ProductsService]
@@ -18,6 +22,9 @@ export class RelatedProductsComponent implements OnInit{
 
     }
     ngOnInit(): void {
+       this.loadRelatedProducts();
+    }
+    loadRelatedProducts(): void {
       this.isLoading = true;
       if(this.relatedProductsIds.length > 0){
         this.productsService.getRelatedProducts(this.relatedProductsIds).subscribe((data) => {
@@ -27,4 +34,19 @@ export class RelatedProductsComponent implements OnInit{
         })
       }
     }
+      breakpoints = {
+        640: {
+          slidesPerView: 1,
+          spaceBetween: 10
+        },
+        768: {
+          slidesPerView: 3,
+          spaceBetween: 10
+        },
+        1024: {
+          slidesPerView: 4,
+          spaceBetween: 10
+        }
+      }
+
 }

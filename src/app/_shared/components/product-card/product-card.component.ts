@@ -9,9 +9,9 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-product-card',
+standalone: true,
   imports: [CommonModule,PriceLocaleStringPipe, LoadingComponent, TomanComponent, ExtractOriginalPricePipe],
   templateUrl: './product-card.component.html',
-  styles: ``
 })
 export class ProductCardComponent {
   router: Router = inject(Router)

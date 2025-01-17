@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { categoriesItems } from 'app/_shared/utils/categoriesItems';
 
 @Component({
   selector: 'app-header',
@@ -9,32 +10,7 @@ import { RouterModule } from '@angular/router';
 })
 export class HeaderComponent {
   showMobileMenu : boolean = false;
-  categoriesNav: Array<{id: string, name: string }> = [
-    {
-      id: "3769",
-      name: 'پالتو زیپ پلاس'
-    },
-    {
-     id: "681",
-      name: 'شال و روسری زیپ پلاس'
-    },
-    {
-      id: "672",
-      name: 'کت جین زیپ پلاس'
-    },
-    {
-      id: "520",
-      name: 'شلوار جین زیپ پلاس'
-    },
-    {
-      id: "5168",
-      name: 'دامن جین زیپ پلاس'
-    },
-    {
-      id: "4379",
-      name: 'بادی بلوز بافت کراپ زیپ پلاس'
-    }
-  ];
+  categoriesNav: Array<{id: string, name: string }> = categoriesItems;
   ShowMobileMenuHandler(){
     this.showMobileMenu = !this.showMobileMenu;
   }
