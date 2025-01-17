@@ -9,11 +9,12 @@ import { TomanComponent } from "../../_shared/components/toman/toman.component";
 import { SafeHtmlPipe } from 'app/_shared/pipes/safe-html.pipe';
 import { RelatedProductsComponent } from "./related-products/related-products.component";
 import { ProductLoadingComponent } from "./product-loading/product-loading.component";
-
+import {FormsModule} from '@angular/forms'
+import { HotToastService, provideHotToastConfig } from '@ngxpert/hot-toast';
 
 @Component({
   selector: 'app-product',
-  imports: [CommonModule, ExtractOriginalPricePipe, PriceLocaleStringPipe, TomanComponent, SafeHtmlPipe, RelatedProductsComponent, ProductLoadingComponent],
+  imports: [CommonModule, ExtractOriginalPricePipe, PriceLocaleStringPipe, TomanComponent, SafeHtmlPipe, RelatedProductsComponent, ProductLoadingComponent, FormsModule],
   templateUrl: './product.component.html',
   styleUrls: ['./product.component.css'],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -22,13 +23,15 @@ import { ProductLoadingComponent } from "./product-loading/product-loading.compo
 export class ProductComponent implements OnInit{
  route: ActivatedRoute = inject(ActivatedRoute)
  router: Router = inject(Router)
+ toast: HotToastService = inject(HotToastService)
  productsService: ProductsService = inject(ProductsService)
  product: any;
  productImages:any;
  isLoading: boolean = false;
  productId!: string;
- productQty: number = 1;
- relatedProductsIds : number[] = []
+ quantity: number = 1;
+ relatedProductsIds : number[] = [];
+ selectedAttr: string[] = []
  constructor(){
   this.router.events.subscribe((event) => {
     if (event instanceof NavigationEnd) {
@@ -52,11 +55,15 @@ export class ProductComponent implements OnInit{
   })
  }
  increaseQty(){
-  this.productQty++
+  this.quantity++
  }
  decreaseQty(){
-  if(this.productQty > 1){
-    this.productQty -= 1;
+  if(this.quantity > 1){
+    this.quantity -= 1;
     }
+ }
+ addToCartHandler(){
+   console.log(this.selectedAttr.length === 0)
+   this.toast.success("sdsde1")
  }
 }
